@@ -3,6 +3,7 @@ import { fetchArticles } from './api';
 import ArticleList from './components/ArticleList';
 import ArticleDetails from './components/ArticleDetails';
 import SearchBar from './components/SearchBar';
+import { PulseLoader } from 'react-spinners';
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -32,9 +33,13 @@ function App() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Time.com Articles</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-white bg-gradient-to-r from-blue-500 to-teal-500 p-4 rounded-lg shadow-lg text-center">Articles</h1>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {loading && <p>Loading articles...</p>}
+      {loading && (
+        <div className="flex justify-center items-center h-64">
+          <PulseLoader color="#3498db" />
+        </div>
+      )}
       {error && <p className="text-red-500">Error: {error}</p>}
       {!loading && !error && (
         <div className="flex flex-col md:flex-row">
